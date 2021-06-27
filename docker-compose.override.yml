@@ -1,0 +1,31 @@
+version: "3.4"
+
+# Development environment override
+services:
+  php:
+    volumes:
+      - ./:/srv/app:rw,cached
+      - ./docker/php/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
+      # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
+      # - ./var:/srv/app/var:rw
+    environment:
+      APP_ENV: dev
+      DATABASE_URL: mysql://root:root@db-dev:3306/test?serverVersion=5.7
+
+  caddy:
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./public:/srv/app/public:ro
+
+  db-dev:
+    image: mariadb:10.6
+    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+  db-test:
+    image: mariadb:10.6
+    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
