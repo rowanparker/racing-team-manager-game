@@ -8,7 +8,7 @@ ARG PHP_VERSION=8.0
 ARG CADDY_VERSION=2
 
 # "php" stage
-FROM php:${PHP_VERSION}-fpm-alpine3.12 AS symfony_php
+FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
 
 # persistent / runtime deps
 RUN apk add --no-cache \
@@ -110,6 +110,15 @@ VOLUME /srv/app/var
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
+
+FROM symfony_php as symfony_php_debug
+
+ARG XDEBUG_VERSION=3.0.4
+RUN set -eux; \
+	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
+	pecl install xdebug-$XDEBUG_VERSION; \
+	docker-php-ext-enable xdebug; \
+	apk del .build-deps
 
 FROM caddy:${CADDY_VERSION}-builder-alpine AS symfony_caddy_builder
 
