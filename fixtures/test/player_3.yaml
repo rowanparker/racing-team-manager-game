@@ -1,0 +1,35 @@
+App\Entity\Team:
+    team_player_3:
+        name: "Player Three's Crew"
+        balanceCredits: 10000
+
+App\Entity\DriverSlot:
+    driver_slot_player_3_a:
+        team: '@team_player_3'
+    driver_slot_player_3_b:
+        team: '@team_player_3'
+    driver_slot_player_3_c:
+        team: '@team_player_3'
+
+App\Entity\GarageSlot:
+    garage_slot_player_3_a:
+        team: '@team_player_3'
+    garage_slot_player_3_b:
+        team: '@team_player_3'
+    garage_slot_player_3_c:
+        team: '@team_player_3'
+
+App\Entity\MechanicSlot:
+    mechanic_slot_player_3_a:
+        team: '@team_player_3'
+    mechanic_slot_player_3_b:
+        team: '@team_player_3'
+    mechanic_slot_player_3_c:
+        team: '@team_player_3'
+
+App\Entity\User:
+    user_player_3:
+        username: player3
+        password: player3
+        roles: [ 'ROLE_USER' ]
+        team: '@team_player_3'

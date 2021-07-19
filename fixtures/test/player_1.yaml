@@ -1,0 +1,23 @@
+App\Entity\Team:
+    team_player_1:
+        name: "Player One's Team"
+        balanceCredits: 10000
+
+App\Entity\DriverSlot:
+    driver_slot_player_1_a:
+        team: '@team_player_1'
+
+App\Entity\GarageSlot:
+    garage_slot_player_1_a:
+        team: '@team_player_1'
+
+App\Entity\MechanicSlot:
+    mechanic_slot_player_1_a:
+        team: '@team_player_1'
+
+App\Entity\User:
+    user_player_1:
+        username: player1
+        password: player1
+        roles: [ 'ROLE_USER' ]
+        team: '@team_player_1'

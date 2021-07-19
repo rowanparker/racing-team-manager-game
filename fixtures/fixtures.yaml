@@ -1,0 +1,44 @@
+App\Entity\Car:
+    car1:
+        make: Hyundai
+        model: Excel (X3)
+        year: 1994
+        marketPrice: 600
+        
+    car2:
+        make: Ford
+        model: Falcon (EA)
+        year: 1988
+        marketPrice: 450
+        
+    car3:
+        make: Holden
+        model: Commodore (VN)
+        year: 1989
+        marketPrice: 500
+
+App\Entity\Driver:
+    driver1:
+        name: Jack
+        marketPrice: 1000
+        
+    driver2:
+        name: Jane
+        marketPrice: 20000
+        
+    driver3:
+        name: Jenna
+        marketPrice: 50000       
+        
+App\Entity\Mechanic:
+    mechanic1:
+        name: Bob
+        marketPrice: 400
+    
+    mechanic2:
+        name: Alice
+        marketPrice: 15000
+        
+    mechanic3:
+        name: Claire
+        marketPrice: 40000

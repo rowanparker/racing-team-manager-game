@@ -1,0 +1,11 @@
+App\Entity\Team:
+    team_player_2:
+        name: "Player Two's Gang"
+        balanceCredits: 200
+
+App\Entity\User:
+    user_player_2:
+        username: player2
+        password: player2
+        roles: [ 'ROLE_USER' ]
+        team: '@team_player_2'

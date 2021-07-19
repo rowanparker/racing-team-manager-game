@@ -1,0 +1,5 @@
+App\Entity\User:
+    user_admin_1:
+        username: admin
+        password: admin
+        roles: ['ROLE_ADMIN']

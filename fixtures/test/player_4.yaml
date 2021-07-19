@@ -1,0 +1,5 @@
+App\Entity\User:
+    user_player_4:
+        username: player4
+        password: player4
+        roles: [ 'ROLE_USER' ]
