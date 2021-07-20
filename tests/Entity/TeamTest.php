@@ -78,7 +78,7 @@ class TeamTest extends AppApiTestCase
         $this->client->request('GET', '/api/teams');
         $this->assertResponseIsSuccessful();
         $this->assertJsonContains([
-            'hydra:totalItems' => 3
+            'hydra:totalItems' => 4
         ]);
     }
 

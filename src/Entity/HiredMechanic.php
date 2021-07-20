@@ -2,9 +2,27 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\HiredMechanicRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+#[ApiResource(
+    collectionOperations: [
+        'post' => [
+            'security' => 'is_granted("ROLE_USER")'
+        ]
+    ],
+    itemOperations: [
+        'get' => [
+            'security' => 'is_granted("ROLE_USER")',
+        ],
+        'delete' => [
+            'security' => 'is_granted("ROLE_USER")',
+        ]
+    ],
+)]
+#[UniqueEntity("mechanicSlot", message: 'Mechanic slot is already full.')]
 /**
  * @ORM\Entity(repositoryClass=HiredMechanicRepository::class)
  */

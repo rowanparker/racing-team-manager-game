@@ -1,6 +1,7 @@
+# New user, high credit balance
 App\Entity\Team:
     team_player_1:
-        name: "Player One's Team"
+        name: "Player One"
         balanceCredits: 10000
 
 App\Entity\DriverSlot:

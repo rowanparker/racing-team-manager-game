@@ -1,6 +1,7 @@
+# User with maxed slots, all filled
 App\Entity\Team:
     team_player_3:
-        name: "Player Three's Crew"
+        name: "Player Three"
         balanceCredits: 10000
 
 App\Entity\DriverSlot:
@@ -10,6 +11,17 @@ App\Entity\DriverSlot:
         team: '@team_player_3'
     driver_slot_player_3_c:
         team: '@team_player_3'
+        
+App\Entity\HiredDriver:
+    hired_driver_player_3_a:
+        driverSlot: '@driver_slot_player_3_a'
+        driver: '@driver1'
+    hired_driver_player_3_b:
+        driverSlot: '@driver_slot_player_3_b'
+        driver: '@driver2'
+    hired_driver_player_3_c:
+        driverSlot: '@driver_slot_player_3_c'
+        driver: '@driver3'
 
 App\Entity\GarageSlot:
     garage_slot_player_3_a:
@@ -19,6 +31,17 @@ App\Entity\GarageSlot:
     garage_slot_player_3_c:
         team: '@team_player_3'
 
+App\Entity\OwnedCar:
+    owned_car_3_a:
+        garageSlot: '@garage_slot_player_3_a'
+        car: '@car1'
+    owned_car_3_b:
+        garageSlot: '@garage_slot_player_3_b'
+        car: '@car2'
+    owned_car_3_c:
+        garageSlot: '@garage_slot_player_3_c'
+        car: '@car3'
+
 App\Entity\MechanicSlot:
     mechanic_slot_player_3_a:
         team: '@team_player_3'
@@ -26,6 +49,17 @@ App\Entity\MechanicSlot:
         team: '@team_player_3'
     mechanic_slot_player_3_c:
         team: '@team_player_3'
+
+App\Entity\HiredMechanic:
+    hired_mechanic_player_3_a:
+        mechanicSlot: '@mechanic_slot_player_3_a'
+        mechanic: '@mechanic1'
+    hired_mechanic_player_3_b:
+        mechanicSlot: '@mechanic_slot_player_3_b'
+        mechanic: '@mechanic2'
+    hired_mechanic_player_3_c:
+        mechanicSlot: '@mechanic_slot_player_3_c'
+        mechanic: '@mechanic3'
 
 App\Entity\User:
     user_player_3:

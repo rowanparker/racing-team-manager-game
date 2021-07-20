@@ -2,9 +2,27 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\HiredDriverRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+#[ApiResource(
+    collectionOperations: [
+        'post' => [
+            'security' => 'is_granted("ROLE_USER")'
+        ]
+    ],
+    itemOperations: [
+        'get' => [
+            'security' => 'is_granted("ROLE_USER")',
+        ],
+        'delete' => [
+            'security' => 'is_granted("ROLE_USER")',
+        ]
+    ],
+)]
+#[UniqueEntity("driverSlot", message: 'Driver slot is already full.')]
 /**
  * @ORM\Entity(repositoryClass=HiredDriverRepository::class)
  */

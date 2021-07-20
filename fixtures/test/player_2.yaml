@@ -1,7 +1,20 @@
+# New user, low credit balance
 App\Entity\Team:
     team_player_2:
-        name: "Player Two's Gang"
+        name: "Player Two"
         balanceCredits: 200
+
+App\Entity\DriverSlot:
+    driver_slot_player_2_a:
+        team: '@team_player_2'
+
+App\Entity\GarageSlot:
+    garage_slot_player_2_a:
+        team: '@team_player_2'
+
+App\Entity\MechanicSlot:
+    mechanic_slot_player_2_a:
+        team: '@team_player_2'
 
 App\Entity\User:
     user_player_2:

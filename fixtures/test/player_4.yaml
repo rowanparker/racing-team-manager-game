@@ -1,3 +1,4 @@
+# New user, yet to create a team
 App\Entity\User:
     user_player_4:
         username: player4

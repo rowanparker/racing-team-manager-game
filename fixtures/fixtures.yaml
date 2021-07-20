@@ -18,10 +18,10 @@ App\Entity\Car:
         marketPrice: 500
         
     car4:
-        make: Toyota
-        model: Camry (V20)
-        year: 1986
-        marketPrice: 300
+        make: Lexus
+        model: LS (XF10)
+        year: 1990
+        marketPrice: 2500
 
 App\Entity\Driver:
     driver1:

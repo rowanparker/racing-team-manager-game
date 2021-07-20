@@ -39,7 +39,7 @@ abstract class AbstractSlotTest extends AppApiTestCase
         $this->assertCount(2, $response->toArray()['hydra:member']);
 
         // Fixture has 10,000 initial credit balance for player 1
-        $iri = $this->findIriBy(Team::class, ['name' => "Player One's Team"]);
+        $iri = $this->findIriBy(Team::class, ['name' => "Player One"]);
         $response = $this->client->request('GET', $iri);
         $this->assertSame(5000, $response->toArray(false)['balanceCredits']);
     }

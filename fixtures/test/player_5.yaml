@@ -1,0 +1,52 @@
+# User with all slots purchased
+# Only 1 of each filled
+App\Entity\Team:
+    team_player_5:
+        name: "Player Five"
+        balanceCredits: 10000
+
+App\Entity\DriverSlot:
+    driver_slot_player_5_a:
+        team: '@team_player_5'
+    driver_slot_player_5_b:
+        team: '@team_player_5'
+    driver_slot_player_5_c:
+        team: '@team_player_5'
+
+App\Entity\HiredDriver:
+    hired_driver_player_5_a:
+        driverSlot: '@driver_slot_player_5_a'
+        driver: '@driver1'
+
+App\Entity\GarageSlot:
+    garage_slot_player_5_a:
+        team: '@team_player_5'
+    garage_slot_player_5_b:
+        team: '@team_player_5'
+    garage_slot_player_5_c:
+        team: '@team_player_5'
+
+App\Entity\OwnedCar:
+    owned_car_5_a:
+        garageSlot: '@garage_slot_player_5_a'
+        car: '@car1'
+
+App\Entity\MechanicSlot:
+    mechanic_slot_player_5_a:
+        team: '@team_player_5'
+    mechanic_slot_player_5_b:
+        team: '@team_player_5'
+    mechanic_slot_player_5_c:
+        team: '@team_player_5'
+
+App\Entity\HiredMechanic:
+    hired_mechanic_player_5_a:
+        mechanicSlot: '@mechanic_slot_player_5_a'
+        mechanic: '@mechanic1'
+
+App\Entity\User:
+    user_player_5:
+        username: player5
+        password: player5
+        roles: [ 'ROLE_USER' ]
+        team: '@team_player_5'

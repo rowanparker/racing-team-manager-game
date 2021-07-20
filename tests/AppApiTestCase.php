@@ -65,23 +65,42 @@ abstract class AppApiTestCase extends ApiTestCase
         $this->assertJsonContains(['hydra:description'=>$message]);
     }
 
+    protected function getIriFromItem($item): string
+    {
+        return static::$container->get('api_platform.iri_converter')->getIriFromItem($item);
+    }
+
+    protected function findUserByUsername(string $username): ?User
+    {
+        return $this->entityFindOneBy(User::class, ['username'=>$username]);
+    }
+
+    protected function entityFindOneBy(string $class, array $criteria)
+    {
+        return static::$container->get('doctrine')->getManagerForClass($class)
+            ->getRepository($class)->findOneBy($criteria);
+    }
+
+    protected function entityFindBy(string $class, array $criteria)
+    {
+        return static::$container->get('doctrine')->getManagerForClass($class)
+            ->getRepository($class)->findBy($criteria);
+    }
+
     protected function findNthSlotIriByUsername(string $username, string $slotClass, int $nth = 1): ?string
     {
         $i = $nth - 1;
 
-        /** @var User $user */
-        $user = static::$container->get('doctrine')->getManagerForClass(User::class)
-            ->getRepository(User::class)->findOneBy(['username'=>$username]);
+        $user = $this->findUserByUsername($username);
 
         if ( ! $user->getTeam()) {
             return null;
         }
 
-        $slots = static::$container->get('doctrine')->getManagerForClass($slotClass)
-            ->getRepository($slotClass)->findBy(['team'=>$user->getTeam()->getId()]);
+        $slots = $this->entityFindBy($slotClass, ['team'=>$user->getTeam()->getId()]);
 
         return (array_key_exists($i, $slots))
-            ? static::$container->get('api_platform.iri_converter')->getIriFromItem($slots[$i])
+            ? $this->getIriFromItem($slots[$i])
             : null;
     }
 }

@@ -12,3 +12,4 @@ api_platform:
         App\Exception\UserAlreadyHasTeamException: 422
         App\Exception\InsufficientCreditsException: 422
         App\Exception\InsufficientFreeSlots: 422
+        App\Exception\GameRulesException: 422
