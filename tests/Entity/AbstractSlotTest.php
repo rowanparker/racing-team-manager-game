@@ -3,7 +3,6 @@
 namespace App\Tests\Entity;
 
 use App\Entity\Team;
-use App\Entity\User;
 use App\Tests\AppApiTestCase;
 
 abstract class AbstractSlotTest extends AppApiTestCase
@@ -101,7 +100,7 @@ abstract class AbstractSlotTest extends AppApiTestCase
      */
     public function test_GET_item_by_logged_out_user_fails()
     {
-        $iri = $this->findFirstSlotIriByUsername('player1');
+        $iri = $this->findNthSlotIriByUsername('player1');
         $this->client->request('GET', $iri);
         $this->assertHttpUnauthorized401();
     }
@@ -112,7 +111,7 @@ abstract class AbstractSlotTest extends AppApiTestCase
     public function test_GET_item_by_logged_in_user_for_self_succeeds()
     {
         $this->loginAsUser('player1', 'player1');
-        $iri = $this->findFirstSlotIriByUsername('player1');
+        $iri = $this->findNthSlotIriByUsername('player1');
         $this->client->request('GET', $iri);
         $this->assertResponseIsSuccessful();
     }
@@ -123,7 +122,7 @@ abstract class AbstractSlotTest extends AppApiTestCase
     public function test_GET_item_by_logged_in_user_for_other_fails()
     {
         $this->loginAsUser('player1', 'player1');
-        $iri = $this->findFirstSlotIriByUsername('player3');
+        $iri = $this->findNthSlotIriByUsername('player3');
         $this->client->request('GET', $iri);
         $this->assertHttpNotFound404();
     }
@@ -133,7 +132,7 @@ abstract class AbstractSlotTest extends AppApiTestCase
      */
     public function test_PATCH_is_disabled()
     {
-        $iri = $this->findFirstSlotIriByUsername('player1');
+        $iri = $this->findNthSlotIriByUsername('player1');
         $this->client->request('PATCH', $iri, ['json' => [], 'headers' => [
             'content-type'=> 'application/merge-patch+json'
         ]]);
@@ -145,7 +144,7 @@ abstract class AbstractSlotTest extends AppApiTestCase
      */
     public function test_DELETE_by_logged_out_user_fails()
     {
-        $iri = $this->findFirstSlotIriByUsername('player1');
+        $iri = $this->findNthSlotIriByUsername('player1');
         $this->client->request('DELETE', $iri);
         $this->assertHttpUnauthorized401();
     }
@@ -156,7 +155,7 @@ abstract class AbstractSlotTest extends AppApiTestCase
     public function test_DELETE_by_logged_in_user_for_self_fails()
     {
         $this->loginAsUser('player1', 'player1');
-        $iri = $this->findFirstSlotIriByUsername('player1');
+        $iri = $this->findNthSlotIriByUsername('player1');
         $this->client->request('DELETE', $iri);
         $this->assertHttpForbidden403();
     }
@@ -167,7 +166,7 @@ abstract class AbstractSlotTest extends AppApiTestCase
     public function test_DELETE_by_logged_in_user_for_other_user_fails()
     {
         $this->loginAsUser('player1', 'player1');
-        $iri = $this->findFirstSlotIriByUsername('player3');
+        $iri = $this->findNthSlotIriByUsername('player3');
         $this->client->request('DELETE', $iri);
         $this->assertHttpNotFound404();
     }
@@ -178,7 +177,7 @@ abstract class AbstractSlotTest extends AppApiTestCase
     public function test_DELETE_by_admin_user_succeeds()
     {
         $this->loginAsUser('admin', 'admin');
-        $iri = $this->findFirstSlotIriByUsername('player1');
+        $iri = $this->findNthSlotIriByUsername('player1');
         $this->client->request('DELETE', $iri);
         $this->assertResponseIsSuccessful();
     }
@@ -188,26 +187,8 @@ abstract class AbstractSlotTest extends AppApiTestCase
      */
     public function test_PUT_is_disabled()
     {
-        $iri = $this->findFirstSlotIriByUsername('player1');
+        $iri = $this->findNthSlotIriByUsername('player1');
         $this->client->request('PUT', $iri);
         $this->assertResponseStatusCodeSame(405);
-    }
-
-    protected function findFirstSlotIriByUsername(string $username): ?string
-    {
-        /** @var User $user */
-        $user = static::$container->get('doctrine')->getManagerForClass(User::class)
-            ->getRepository(User::class)->findOneBy(['username'=>$username]);
-
-        if ( ! $user->getTeam()) {
-            return null;
-        }
-
-        $slot = static::$container->get('doctrine')->getManagerForClass($this->resourceClass)
-            ->getRepository($this->resourceClass)->findOneBy(['team'=>$user->getTeam()->getId()]);
-
-        return ($slot)
-            ? static::$container->get('api_platform.iri_converter')->getIriFromItem($slot)
-            : null;
     }
 }

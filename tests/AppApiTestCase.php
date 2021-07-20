@@ -64,4 +64,24 @@ abstract class AppApiTestCase extends ApiTestCase
         $this->assertResponseStatusCodeSame(405);
         $this->assertJsonContains(['hydra:description'=>$message]);
     }
+
+    protected function findNthSlotIriByUsername(string $username, int $nth = 1): ?string
+    {
+        $i = $nth - 1;
+
+        /** @var User $user */
+        $user = static::$container->get('doctrine')->getManagerForClass(User::class)
+            ->getRepository(User::class)->findOneBy(['username'=>$username]);
+
+        if ( ! $user->getTeam()) {
+            return null;
+        }
+
+        $slots = static::$container->get('doctrine')->getManagerForClass($this->resourceClass)
+            ->getRepository($this->resourceClass)->findBy(['team'=>$user->getTeam()->getId()]);
+
+        return (array_key_exists($i, $slots))
+            ? static::$container->get('api_platform.iri_converter')->getIriFromItem($slots[$i])
+            : null;
+    }
 }
