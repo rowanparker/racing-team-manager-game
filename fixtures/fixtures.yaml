@@ -16,6 +16,12 @@ App\Entity\Car:
         model: Commodore (VN)
         year: 1989
         marketPrice: 500
+        
+    car4:
+        make: Toyota
+        model: Camry (V20)
+        year: 1986
+        marketPrice: 300
 
 App\Entity\Driver:
     driver1:
@@ -28,7 +34,11 @@ App\Entity\Driver:
         
     driver3:
         name: Jenna
-        marketPrice: 50000       
+        marketPrice: 50000  
+        
+    driver4:
+        name: Joe
+        marketPrice: 75000       
         
 App\Entity\Mechanic:
     mechanic1:
@@ -41,4 +51,8 @@ App\Entity\Mechanic:
         
     mechanic3:
         name: Claire
+        marketPrice: 40000
+        
+    mechanic4:
+        name: Dana
         marketPrice: 40000

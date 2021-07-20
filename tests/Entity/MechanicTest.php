@@ -52,7 +52,7 @@ class MechanicTest extends AppApiTestCase
     {
         $response = $this->client->request('GET', $this->urlApi);
         $this->assertResponseIsSuccessful();
-        $this->assertCount(3, $response->toArray()['hydra:member']);
+        $this->assertCount(4, $response->toArray()['hydra:member']);
     }
 
     /**
