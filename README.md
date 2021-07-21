@@ -6,7 +6,7 @@ Racing-Team-Manager-Game
 This project exists primarily for me to learn and keep up to date with the following technologies.
 
 - Backend uses [API Platform](https://api-platform.com)
-- Frontend uses [Svelte](https://svelte.dev)
+- Frontend uses [Svelte](https://svelte.dev) written in [TypeScript](https://www.typescriptlang.org)
 - Production and development environments handled by [Docker](https://docker.com)
 - Client data updates pushed using [Mercure](https://mercure.rocks)
 - HTTPS served using [Caddy](https://caddyserver.com)
