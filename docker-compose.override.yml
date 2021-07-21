@@ -29,6 +29,9 @@ services:
     volumes:
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - ./public:/srv/app/public:ro
+      
+  svelte:
+    command: 'sh -c "npm install; npm run dev"'
 
   db-dev:
     image: mariadb:10.6.2

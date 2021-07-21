@@ -26,3 +26,5 @@ helm/
 public/bundles/
 var/
 vendor/
+svelte/
+!svelte/package.json
